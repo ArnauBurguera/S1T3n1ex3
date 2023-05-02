@@ -1,24 +1,29 @@
 package s1t3n1ex3;
 
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class EscriureFitxer {
 	
-	public void escriure() {
-		String frase = "Estic escrivint.";
+	public void escriure(String nom, int puntuacio) {
+		FileWriter arxiuPuntuacio = null;
+		BufferedWriter bufferSortida = null;
 		
 		try {
-			FileWriter escriptura = new FileWriter("C:\\\\Users\\Arnau\\eclipse-workspace\\S1T3n1ex3\\classificacio.txt", true);
+			arxiuPuntuacio = new FileWriter("classificacio.txt", true);
+			bufferSortida = new BufferedWriter(arxiuPuntuacio);
 			
-			for(int i = 0; i < frase.length(); i++) {
-				escriptura.write(frase.charAt(i));
-			}
-			
-			escriptura.close();
+			bufferSortida.write(nom + " ; " + puntuacio + "/10 punts.");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				bufferSortida.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
